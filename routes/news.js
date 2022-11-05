@@ -1,14 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const News = require('../models/news')
+const setHeader = require('../middleware/setHeader')
 
 // @router GET api/news/id
 // @desc   get news detail
 // access  Public
 
-router.get('/detail', async (req,res) => {
+router.get('/detail', setHeader, async (req,res) => {
     const id = req.query.id
-    console.log(req.headers)
     try {
         const detailNews = await News.findById(id)
         res.json({success : true, message : 'find news by id successfully', news :detailNews })
@@ -21,7 +21,7 @@ router.get('/detail', async (req,res) => {
 // @router GET api/news
 // @desc   get news
 // access  Public
-router.get('/',async (req,res) => {
+router.get('/',setHeader,async (req,res) => {
     try {
         const newsList = await News.find()
         res.json({success : true, message : 'get list news successfully', newsList : newsList})
@@ -36,7 +36,7 @@ router.get('/',async (req,res) => {
 // @desc   post news
 // access  Public
 
-router.post('/', async (req,res) => {
+router.post('/',setHeader, async (req,res) => {
     const {title, author, date, content, img} = req.body
     let dateDefault
    

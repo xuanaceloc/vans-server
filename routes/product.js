@@ -1,13 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const Product = require('../models/product')
+const setHeader = require('../middleware/setHeader')
+
 
 
 // @router GET api/product/allVans
 // @desc   get product all Vans
 // access  Public
 
-router.get('/all-vans', async (req,res) => {
+router.get('/all-vans',setHeader, async (req,res) => {
     try {
         const data = await Product.find().then(res => res)        
         res.json({success : true, message : 'find new arrival successfully' , product : data})
@@ -21,7 +23,7 @@ router.get('/all-vans', async (req,res) => {
 // @desc   get product collections
 // access  Public
 
-router.get('/collection', async (req,res) => {
+router.get('/collection',setHeader, async (req,res) => {
     const collection = req.query.collection || ''
     const limit = req.query.limit 
     try {
@@ -44,7 +46,7 @@ router.get('/collection', async (req,res) => {
 // @desc   get product new arrivals
 // access  Public
 
-router.get('/new-arrival', async (req,res) => {
+router.get('/new-arrival',setHeader, async (req,res) => {
     try {
         const data = await Product.find({newArrival : true}).then(res => res)        
         res.json({success : true, message : 'find new arrival successfully' , product : data})
@@ -58,7 +60,7 @@ router.get('/new-arrival', async (req,res) => {
 // @desc   get product best seller
 // access  Public
 
-router.get('/best-seller', async (req,res) => {
+router.get('/best-seller',setHeader, async (req,res) => {
     try {
         const data = await Product.find({bestSeller : true}).then(res => res)        
         res.json({success : true, message : 'find best seller successfully' , product : data})
@@ -72,7 +74,7 @@ router.get('/best-seller', async (req,res) => {
 // @desc   get product sale off
 // access  Public
 
-router.get('/sale-off', async (req,res) => {
+router.get('/sale-off',setHeader, async (req,res) => {
     const sale = req.query.sale || 'all'
     try {
         const data = await Product.find({sale : {$gte : 1} }).then(res => {
@@ -96,7 +98,7 @@ router.get('/sale-off', async (req,res) => {
 // @desc   get product by id
 // access  Public
 
-router.get('/id', async (req,res) => {
+router.get('/id',setHeader, async (req,res) => {
     const productId = req.query.productId
     try {
         const data = await Product.find({productId : productId }).then(res => res) 
@@ -112,7 +114,7 @@ router.get('/id', async (req,res) => {
 // @desc   post product
 // access  Public
 
-router.post('/', async (req,res) => {
+router.post('/',setHeader, async (req,res) => {
     const {info} = req.body
     const { name, brand, productId, newPrice,oldPrice, 
             sizeQuality, productImg, description, 
