@@ -8,6 +8,7 @@ const News = require('../models/news')
 
 router.get('/detail', async (req,res) => {
     const id = req.query.id
+    console.log(req.headers)
     try {
         const detailNews = await News.findById(id)
         res.json({success : true, message : 'find news by id successfully', news :detailNews })

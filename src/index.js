@@ -9,10 +9,7 @@ const newsRouter = require('./routes/news.js')
 
 const connectDB = async () => {
     try {
-        mongoose.connect(`mongodb+srv://${process.env.USERNAME_DB}:${process.env.PASSWORD_DB}@cluster0.3wozsnm.mongodb.net/?retryWrites=true&w=majority`, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        })
+        mongoose.connect(`mongodb+srv://${process.env.USERNAME_DB}:${process.env.PASSWORD_DB}@cluster0.3wozsnm.mongodb.net/?retryWrites=true&w=majority`)
         console.log('mongooseDB is connected')
     } catch (error) {
         console.log(error)
@@ -22,9 +19,8 @@ const connectDB = async () => {
 
 connectDB()
 
-// app.use(cors())
+app.use(cors())
 app.use(express.json())
-
 
 app.use('/api/product', productRouter)
 app.use('/api/news', newsRouter)
