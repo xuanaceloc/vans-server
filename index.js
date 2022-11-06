@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000
-const cors = require('cors')
+const cors = require('express-cors')
 const mongoose = require('mongoose')
 const productRouter = require('./routes/product.js')
 const newsRouter = require('./routes/news.js')
@@ -19,7 +19,9 @@ const connectDB = async () => {
 
 connectDB()
 
-app.use(cors())
+app.use(cors({
+    allowedOrigins : ['*']
+}))
 app.use(express.json())
 
 app.use('/api/product', productRouter)
