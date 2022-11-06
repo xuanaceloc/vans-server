@@ -20,7 +20,7 @@ const connectDB = async () => {
 connectDB()
 
 app.use(cors({
-    allowedOrigins : ['*']
+    allowedOrigins : ['https://glowing-elf-41f004.netlify.app']
 }))
 app.use(express.json())
 
