@@ -9,7 +9,7 @@ const newsRouter = require('./routes/news.js')
 
 const connectDB = async () => {
     try {
-        mongoose.connect(`mongodb+srv://${process.env.USERNAME_DB}:${process.env.PASSWORD_DB}@cluster0.3wozsnm.mongodb.net/?retryWrites=true&w=majority`)
+        mongoose.connect(`mongodb+srv://nxl:1234@cluster0.3wozsnm.mongodb.net/?retryWrites=true&w=majority`)
         console.log('mongooseDB is connected')
     } catch (error) {
         console.log(error)
@@ -20,7 +20,7 @@ const connectDB = async () => {
 connectDB()
 
 app.use(cors({
-    allowedOrigins : ['https://glowing-elf-41f004.netlify.app']
+    Origins : ['*']
 }))
 app.use(express.json())
 
